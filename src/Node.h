@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef SRC_NODE_H
+#define SRC_NODE_H
 
 #include <iostream>
 #include <array>
@@ -42,4 +42,7 @@ private:
   int_t rank_ = 0;
 };
 
-#endif // NODE_H
+std::ostream &operator<<(std::ostream &os, const Node::Position &pos);
+std::string pos_to_string(const Node::Position &pos);
+
+#endif // SRC_NODE_H

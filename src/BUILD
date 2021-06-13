@@ -13,6 +13,7 @@ cc_library(
 cc_library(
     name = "RandomPositionGenerator",
     hdrs = ["RandomPositionGenerator.h"],
+    srcs = ["RandomPositionGenerator.cc"],
     deps = [
         ":constants",
         ":Node",
@@ -26,5 +27,6 @@ cc_binary(
         ":Node",
         ":constants",
         ":RandomPositionGenerator",
+        "@com_google_absl//absl/hash",
     ],
 )

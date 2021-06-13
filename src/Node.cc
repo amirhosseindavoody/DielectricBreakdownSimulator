@@ -103,3 +103,28 @@ std::ostream &operator<<(std::ostream &os, const Node &node)
     os << node.str();
     return os;
 }
+
+std::string pos_to_string(const Node::Position &pos)
+{
+    std::string res;
+    for (const auto &p : pos)
+    {
+        res.append(std::to_string(p));
+        res.push_back(',');
+    }
+    res.pop_back();
+    return res;
+}
+
+std::ostream &operator<<(std::ostream &os, const Node::Position &pos)
+{
+    std::string res;
+    for (const auto &p : pos)
+    {
+        res.append(std::to_string(p));
+        res.push_back(',');
+    }
+    res.pop_back();
+    os << res;
+    return os;
+}

@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <random>
+#include "absl/hash/hash.h"
 
 #include "Node.h"
 #include "RandomPositionGenerator.h"
@@ -10,19 +11,19 @@
 
 int main()
 {
-  std::unordered_map<std::string, Node *> map;
+  std::unordered_map<Node::Position, Node *, absl::Hash<Node::Position>> map;
 
-  auto generator = RandomPositionGenerator(0, 1000, 0);
+  auto generator = RandomPositionGenerator(0, 1000);
   Node *node = nullptr;
 
   for (int64_t i = 0; i < 10; i++)
   {
-    while (!node || map.count(node->str()) == 1)
+    while (!node || map.count(node->pos()) == 1)
     {
       delete node;
       node = new Node(generator.get());
     }
-    map[node->str()] = node;
+    map[node->pos()] = node;
     node = nullptr;
   }
 
@@ -34,6 +35,4 @@ int main()
   }
 
   std::cout << std::endl;
-
-  std::cout << "Hello World!\n";
 }
