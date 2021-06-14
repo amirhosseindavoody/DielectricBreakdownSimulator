@@ -1,18 +1,18 @@
 #ifndef SRC_NODE_H
 #define SRC_NODE_H
 
-#include <iostream>
-#include <array>
 #include <algorithm>
-#include <unordered_map>
+#include <array>
+#include <iostream>
 #include <random>
+#include <unordered_map>
+
 #include "constants.h"
 
 constexpr int ndim = 2;
 
-class Node
-{
-public:
+class Node {
+ public:
   using Position = std::array<int_t, kNdim>;
 
   Node(const Position &pos);
@@ -31,7 +31,7 @@ public:
 
   friend std::ostream &operator<<(std::ostream &os, const Node &dt);
 
-private:
+ private:
   Position pos_;
   Position pos_max_;
   Position pos_min_;
@@ -45,4 +45,4 @@ private:
 std::ostream &operator<<(std::ostream &os, const Node::Position &pos);
 std::string pos_to_string(const Node::Position &pos);
 
-#endif // SRC_NODE_H
+#endif  // SRC_NODE_H
