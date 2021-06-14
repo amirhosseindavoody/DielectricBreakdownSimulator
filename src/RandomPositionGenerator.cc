@@ -11,15 +11,31 @@ constexpr int16_t kSeed = 0;
 // gen.seed(kSeed);
 
 }  // namespace
-RandomPositionGenerator::RandomPositionGenerator(int_t min, int_t max)
-    : distrib_(min, max) {
+RandomPositionGenerator::RandomPositionGenerator(
+    int_t min, int_t max,
+    const std::unordered_map<Node::Position, Node*, absl::Hash<Node::Position>>&
+        map)
+    : distrib_(min, max), map_(map) {
   gen.seed(kSeed);
 }
 
-Node::Position RandomPositionGenerator::get() {
+std::vector<Node::Position> RandomPositionGenerator::get(int_t n) {
+  CHECK_GT(n, 0) << ": input n must be greater than 0";
+  std::vector<Node::Position> res;
   Node::Position pos;
-  for (auto &p : pos) {
-    p = distrib_(gen);
+
+  auto populate_pos = [this, &pos]() {
+    for (auto& p : pos) {
+      p = distrib_(gen);
+    }
+  };
+
+  while (res.size() < static_cast<size_t>(n)) {
+    populate_pos();
+    if (map_.count(pos) == 0) {
+      res.push_back(pos);
+    }
   }
-  return pos;
+
+  return res;
 }

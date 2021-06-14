@@ -17,6 +17,8 @@ cc_library(
     deps = [
         ":constants",
         ":Node",
+        "@com_google_absl//absl/hash",
+        "@com_github_google_glog//:glog",
     ]
 )
 
