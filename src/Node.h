@@ -29,6 +29,14 @@ class Node {
 
   Position pos() const;
 
+  int_t cluster_size();
+
+  Position cluster_max_pos();
+  
+  Position cluster_min_pos();
+
+  Node *self_ptr();
+
   friend std::ostream &operator<<(std::ostream &os, const Node &dt);
 
  private:

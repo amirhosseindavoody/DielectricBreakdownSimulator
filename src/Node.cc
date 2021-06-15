@@ -8,6 +8,8 @@ Node::Node(const Position &pos)
       size_(1),
       rank_(0){};
 
+Node *Node::self_ptr() { return this; };
+
 std::vector<Node::Position> Node::neighbors() {
   std::vector<Position> neighbor;
   for (std::size_t i = 0; i < pos_.size(); ++i) {
@@ -70,6 +72,19 @@ void Node::UnionByRank(Node *node) {
   if (my_root->rank_ == other_root->rank_) {
     my_root->rank_ += 1;
   }
+
+  // Optionally keep track of cluster sizes
+  my_root->size_ = other_root->size_ + my_root->size_;
+
+  // Update the minimum and maximum position of the cluster
+  for (size_t i = 0; i < pos_max_.size(); ++i) {
+    my_root->pos_min_[i] = my_root->pos_min_[i] > other_root->pos_min_[i]
+                               ? other_root->pos_min_[i]
+                               : my_root->pos_min_[i];
+    my_root->pos_max_[i] = my_root->pos_max_[i] < other_root->pos_max_[i]
+                               ? other_root->pos_max_[i]
+                               : my_root->pos_max_[i];
+  }
 }
 
 std::string Node::str() const {
@@ -88,6 +103,12 @@ std::ostream &operator<<(std::ostream &os, const Node &node) {
   os << node.str();
   return os;
 }
+
+int_t Node::cluster_size() { return FindRoot()->size_; };
+
+Node::Position Node::cluster_max_pos() { return FindRoot()->pos_max_; }
+
+Node::Position Node::cluster_min_pos() { return FindRoot()->pos_min_; }
 
 std::string pos_to_string(const Node::Position &pos) {
   std::string res;

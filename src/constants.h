@@ -6,6 +6,6 @@
 using int_t = int64_t;
 
 constexpr int kNdim = 2;
-const std::array<int_t, kNdim> kSize{1000, 1000};
+const std::array<int_t, kNdim> kSize{100, 100};
 
 #endif  // CONSTANTS_H

@@ -1,3 +1,5 @@
+#include <glog/logging.h>
+
 #include <algorithm>
 #include <array>
 #include <iostream>
@@ -7,26 +9,42 @@
 #include "Node.h"
 #include "RandomPositionGenerator.h"
 #include "absl/hash/hash.h"
+#include "absl/time/clock.h"
 #include "constants.h"
 
-int main() {
-  std::unordered_map<Node::Position, Node *, absl::Hash<Node::Position>> map;
+int main(int argc, char* argv[]) {
+  // // Initialize Google’s logging library.
+  // google::InitGoogleLogging(argv[0]);
 
-  auto generator = RandomPositionGenerator(0, 1000, map);
-  
-  for (int64_t i = 0; i < 10; i++) {
+  LOG(INFO) << "Simulation started at " << absl::Now();
+  std::unordered_map<Node::Position, Node*, absl::Hash<Node::Position>> map;
+
+  auto generator = RandomPositionGenerator(0, kSize[0], map);
+
+  bool breakdown = false;
+  int_t step_counter = 0;
+
+  while (!breakdown) {
+    step_counter++;
+    // LOG_EVERY_N(INFO, 100) << i;
     auto pos_vec = generator.get(1);
-    for (auto& p: pos_vec){
-      auto* node = new Node(p);
-      map[p] = node;
+    for (auto& p : pos_vec) {
+      map.insert({p, new Node(p)});
+      auto neighbors = map.at(p)->neighbors();
+      for (auto& n : neighbors) {
+        if (map.count(n) == 1) {
+          map.at(p)->UnionByRank(map.at(n));
+        }
+      }
+
+      LOG_EVERY_N(INFO, 1000) << map.at(p)->cluster_min_pos()[0] << " , "
+                              << map.at(p)->cluster_max_pos()[0];
+      if (map.at(p)->cluster_min_pos()[0] == 0 &&
+          map.at(p)->cluster_max_pos()[0] == kSize[0]) {
+        std::cout << "Breakdown in " << step_counter << " steps." << std::endl;
+        breakdown = true;
+        break;
+      }
     }
   }
-
-  for (auto &m : map) {
-    std::cout << m.first << " -- " << m.second->str() << std::endl;
-    delete m.second;
-    m.second = nullptr;
-  }
-
-  std::cout << std::endl;
 }

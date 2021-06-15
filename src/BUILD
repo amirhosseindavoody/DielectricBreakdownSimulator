@@ -30,5 +30,7 @@ cc_binary(
         ":constants",
         ":RandomPositionGenerator",
         "@com_google_absl//absl/hash",
+        "@com_google_absl//absl/time",
+        "@com_github_google_glog//:glog",
     ],
 )
