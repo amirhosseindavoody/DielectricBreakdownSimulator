@@ -1,4 +1,4 @@
-#include "Node.h"
+#include "src/Node.h"
 
 Node::Node(const Position &pos)
     : pos_(pos),

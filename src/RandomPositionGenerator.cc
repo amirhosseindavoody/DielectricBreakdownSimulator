@@ -1,25 +1,31 @@
-#include "RandomPositionGenerator.h"
+#include "src/RandomPositionGenerator.h"
 
 #include <unordered_set>
 
 namespace {
-// Will be used to obtain a seed for the random number engine
-std::random_device rd;
 
-// Standard mersenne_twister_engine seeded with rd()
-std::mt19937 gen(rd());
+constexpr int kSeed = 0;
 
-constexpr int16_t kSeed = 0;
-// gen.seed(kSeed);
+std::mt19937_64& random_gen() {
+  static std::mt19937_64 gen_ = [] {
+    // Will be used to obtain a seed for the random number engine
+    std::random_device rd;
+    // Standard mersenne_twister_engine seeded with rd()
+    std::mt19937_64 gen(rd());
+    // Set the seed
+    gen.seed(kSeed);
+    return gen;
+  }();
+  return gen_;
+}
 
 }  // namespace
+
 RandomPositionGenerator::RandomPositionGenerator(
     int_t min, int_t max,
     const std::unordered_map<Node::Position, Node*, absl::Hash<Node::Position>>&
         map)
-    : distrib_(min, max), map_(map) {
-  gen.seed(kSeed);
-}
+    : distrib_(min, max), map_(map) {}
 
 std::vector<Node::Position> RandomPositionGenerator::get(int_t n) {
   CHECK_GT(n, 0) << ": input n must be greater than 0";
@@ -32,7 +38,7 @@ std::vector<Node::Position> RandomPositionGenerator::get(int_t n) {
 
   auto populate_pos = [this, &pos]() {
     for (auto& p : pos) {
-      p = distrib_(gen);
+      p = distrib_(random_gen());
     }
   };
 

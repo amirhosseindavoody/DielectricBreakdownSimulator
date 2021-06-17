@@ -7,7 +7,7 @@
 #include <random>
 #include <unordered_map>
 
-#include "constants.h"
+#include "src/constants.h"
 
 constexpr int ndim = 2;
 

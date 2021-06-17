@@ -6,9 +6,9 @@
 #include <random>
 #include <vector>
 
-#include "Node.h"
 #include "absl/hash/hash.h"
-#include "constants.h"
+#include "src/Node.h"
+#include "src/constants.h"
 
 class RandomPositionGenerator {
  private:
