@@ -22,10 +22,14 @@ std::mt19937_64& random_gen() {
 }  // namespace
 
 RandomPositionGenerator::RandomPositionGenerator(
-    int_t min, int_t max,
+    std::array<int_t, kNdim> max_pos,
     const std::unordered_map<Node::Position, Node*, absl::Hash<Node::Position>>&
         map)
-    : distrib_(min, max), map_(map) {}
+    : max_pos_(max_pos), map_(map) {
+  for (int i = 0; i < kNdim; ++i) {
+    distrib_.push_back(std::uniform_int_distribution<int_t>(0, max_pos_[i]));
+  }
+}
 
 std::vector<Node::Position> RandomPositionGenerator::get(int_t n) {
   CHECK_GT(n, 0) << ": input n must be greater than 0";
@@ -37,8 +41,8 @@ std::vector<Node::Position> RandomPositionGenerator::get(int_t n) {
   std::unordered_set<Node::Position, absl::Hash<Node::Position>> set;
 
   auto populate_pos = [this, &pos]() {
-    for (auto& p : pos) {
-      p = distrib_(random_gen());
+    for (size_t i = 0; i < pos.size(); i++) {
+      pos[i] = distrib_[i](random_gen());
     }
   };
 

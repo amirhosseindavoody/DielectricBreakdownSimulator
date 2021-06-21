@@ -5,7 +5,7 @@
 
 using int_t = int64_t;
 
-constexpr int kNdim = 2;
+constexpr int kNdim = 3;
 const std::array<int_t, kNdim> kSize{100, 100};
 
 #endif  // CONSTANTS_H

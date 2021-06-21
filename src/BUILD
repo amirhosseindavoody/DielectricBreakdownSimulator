@@ -23,15 +23,16 @@ cc_library(
 )
 
 cc_library(
-    name = "SimulateBreakdown",
-    hdrs = ["SimulateBreakdown.h"],
-    srcs = ["SimulateBreakdown.cc"],
+    name = "BreakdownSimulator",
+    hdrs = ["BreakdownSimulator.h"],
+    srcs = ["BreakdownSimulator.cc"],
     deps = [
         ":Node",
         ":constants",
         ":RandomPositionGenerator",
         "@com_google_absl//absl/hash",
         "@com_google_absl//absl/time",
+        "@com_google_absl//absl/strings",
         "@com_github_google_glog//:glog",
     ]
 )
@@ -43,9 +44,12 @@ cc_binary(
         ":Node",
         ":constants",
         ":RandomPositionGenerator",
-        ":SimulateBreakdown",
+        ":BreakdownSimulator",
         "@com_google_absl//absl/hash",
         "@com_google_absl//absl/time",
+        "@com_google_absl//absl/flags:flag",
+        "@com_google_absl//absl/flags:parse",
         "@com_github_google_glog//:glog",
+        "@com_github_gflags_gflags//:gflags",
     ],
 )
