@@ -9,8 +9,8 @@
 #include <unordered_map>
 
 #include "absl/hash/hash.h"
-#include "absl/time/clock.h"
 #include "absl/strings/substitute.h"
+#include "absl/time/clock.h"
 #include "constants.h"
 #include "src/Node.h"
 #include "src/RandomPositionGenerator.h"
@@ -83,15 +83,16 @@ BreakdownSimulator::Result BreakdownSimulator::Run(
     int_t initial_number_of_defects, int_t max_steps) {
   Result result;
 
-  while (!result.breakdown ||
+  // Assume that there are a number of pre-existing defects.
+  while (!result.breakdown &&
          result.initial_number_of_defects < initial_number_of_defects) {
     result.breakdown = CreateDefect(1);
     result.initial_number_of_defects++;
     result.final_number_of_defects++;
   }
 
-  while (!result.breakdown ||
-         result.step_count < max_steps) {
+  // Progress in time and create one new defect with each timestep
+  while (!result.breakdown && result.step_count < max_steps) {
     result.breakdown = CreateDefect(1);
     result.final_number_of_defects++;
     result.step_count++;
@@ -109,6 +110,9 @@ BreakdownSimulator::~BreakdownSimulator() {
 
 std::ostream& operator<<(std::ostream& os,
                          const BreakdownSimulator::Result& result) {
-  os << absl::Substitute("step=$0, breakdown=$1, N0=$2, Nfinal=$3");
+  os << absl::Substitute("step=$0, breakdown=$1, N0=$2, Nfinal=$3",
+                         result.step_count, result.breakdown,
+                         result.initial_number_of_defects,
+                         result.final_number_of_defects);
   return os;
 }
