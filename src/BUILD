@@ -4,9 +4,9 @@ cc_library(
 )
 
 cc_library(
-    name = "Node",
-    hdrs = ["Node.h"],
-    srcs = ["Node.cc"],
+    name = "node",
+    hdrs = ["node.h"],
+    srcs = ["node.cc"],
     deps = [":constants"]
 )
 
@@ -27,7 +27,7 @@ cc_library(
     hdrs = ["BreakdownSimulator.h"],
     srcs = ["BreakdownSimulator.cc"],
     deps = [
-        ":Node",
+        ":node",
         ":constants",
         ":RandomPositionGenerator",
         "@com_google_absl//absl/hash",
@@ -41,7 +41,7 @@ cc_binary(
     name = "main",
     srcs = ["main.cc"],
     deps=[
-        ":Node",
+        ":node",
         ":constants",
         ":RandomPositionGenerator",
         ":BreakdownSimulator",
