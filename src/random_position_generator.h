@@ -7,8 +7,8 @@
 #include <vector>
 
 #include "absl/hash/hash.h"
-#include "src/Node.h"
 #include "src/constants.h"
+#include "src/node.h"
 
 class RandomPositionGenerator {
  public:

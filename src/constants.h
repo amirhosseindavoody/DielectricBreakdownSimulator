@@ -2,6 +2,7 @@
 #define CONSTANTS_H
 
 #include <array>
+#include <cstdint>
 
 using int_t = int64_t;
 

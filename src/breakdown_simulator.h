@@ -1,8 +1,8 @@
 #ifndef SRC_SIMULATE_BREAKDOWN_H
 #define SRC_SIMULATE_BREAKDOWN_H
 
-#include "src/RandomPositionGenerator.h"
 #include "src/constants.h"
+#include "src/random_position_generator.h"
 
 int_t simulate_breakdown();
 

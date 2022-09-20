@@ -1,4 +1,4 @@
-#include "src/BreakdownSimulator.h"
+#include "src/breakdown_simulator.h"
 
 #include <glog/logging.h>
 
@@ -12,12 +12,12 @@
 #include "absl/strings/substitute.h"
 #include "absl/time/clock.h"
 #include "constants.h"
-#include "src/Node.h"
-#include "src/RandomPositionGenerator.h"
 #include "src/constants.h"
+#include "src/node.h"
+#include "src/random_position_generator.h"
 
 int_t simulate_breakdown() {
-  //   LOG(INFO) << "Simulation started at " << absl::Now();
+  LOG(INFO) << "Simulation started at " << absl::Now();
   std::unordered_map<Node::Position, Node*, absl::Hash<Node::Position>> map;
 
   auto generator = RandomPositionGenerator(kSize, map);

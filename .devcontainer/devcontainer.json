@@ -21,7 +21,8 @@
 			],
 			"settings": {
 				"bazel.buildifierExecutable": "/usr/local/bin/buildtools",
-				"bazel.executable": "/usr/local/bin/bazelisk"
+				"bazel.executable": "/usr/local/bin/bazelisk",
+				"bazel.buildifierPath": "/usr/local/bin/buildtools"
 			}
 		}
 	},

@@ -1,4 +1,4 @@
-#include "src/RandomPositionGenerator.h"
+#include "src/random_position_generator.h"
 
 #include <unordered_set>
 

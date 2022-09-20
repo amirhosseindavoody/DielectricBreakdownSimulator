@@ -9,10 +9,10 @@
 #include "absl/hash/hash.h"
 #include "absl/time/clock.h"
 #include "gflags/gflags.h"
-#include "src/BreakdownSimulator.h"
-#include "src/Node.h"
-#include "src/RandomPositionGenerator.h"
+#include "src/breakdown_simulator.h"
 #include "src/constants.h"
+#include "src/node.h"
+#include "src/random_position_generator.h"
 
 DEFINE_int64(size_of_grid, 100, "Size of the grid");
 

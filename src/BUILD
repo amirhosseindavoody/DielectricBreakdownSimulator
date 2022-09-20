@@ -1,6 +1,8 @@
 cc_library(
     name = "constants",
     hdrs = ["constants.h"],
+    deps = [
+    ]
 )
 
 cc_library(
@@ -11,25 +13,25 @@ cc_library(
 )
 
 cc_library(
-    name = "RandomPositionGenerator",
-    hdrs = ["RandomPositionGenerator.h"],
-    srcs = ["RandomPositionGenerator.cc"],
+    name = "random_position_generator",
+    hdrs = ["random_position_generator.h"],
+    srcs = ["random_position_generator.cc"],
     deps = [
         ":constants",
-        ":Node",
+        ":node",
         "@com_google_absl//absl/hash",
         "@com_github_google_glog//:glog",
     ]
 )
 
 cc_library(
-    name = "BreakdownSimulator",
-    hdrs = ["BreakdownSimulator.h"],
-    srcs = ["BreakdownSimulator.cc"],
+    name = "breakdown_simulator",
+    hdrs = ["breakdown_simulator.h"],
+    srcs = ["breakdown_simulator.cc"],
     deps = [
         ":node",
         ":constants",
-        ":RandomPositionGenerator",
+        ":random_position_generator",
         "@com_google_absl//absl/hash",
         "@com_google_absl//absl/time",
         "@com_google_absl//absl/strings",
@@ -43,8 +45,8 @@ cc_binary(
     deps=[
         ":node",
         ":constants",
-        ":RandomPositionGenerator",
-        ":BreakdownSimulator",
+        ":random_position_generator",
+        ":breakdown_simulator",
         "@com_google_absl//absl/hash",
         "@com_google_absl//absl/time",
         "@com_google_absl//absl/flags:flag",
