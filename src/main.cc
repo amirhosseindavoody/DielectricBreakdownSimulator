@@ -26,13 +26,12 @@ int main(int argc, char** argv) {
   LOG(INFO) << "Simulation started at " << absl::Now();
   std::vector<BreakdownSimulator::Result> sim_results;
   for (int i = 0; i < 10; ++i) {
-    LOG_EVERY_N(INFO,1) << "Step: " << i;
+    LOG_EVERY_N(INFO, 1) << "Step: " << i;
 
     BreakdownSimulator simulator(kSize);
     BreakdownSimulator::Result sim_result = simulator.Run(4000, 10000);
     sim_results.push_back(sim_result);
 
-    std::cout << "Simulation " << i << ": " << sim_results.back() <<
-    std::endl;
+    std::cout << "Simulation " << i << ": " << sim_results.back() << std::endl;
   }
 }

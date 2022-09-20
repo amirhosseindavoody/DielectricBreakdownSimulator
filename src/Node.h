@@ -32,7 +32,7 @@ class Node {
   int_t cluster_size();
 
   Position cluster_max_pos();
-  
+
   Position cluster_min_pos();
 
   Node *self_ptr();
