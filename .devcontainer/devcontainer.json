@@ -18,7 +18,11 @@
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"devondcarew.bazel-code"
-			]
+			],
+			"settings": {
+				"bazel.buildifierExecutable": "/usr/local/bin/buildtools",
+				"bazel.executable": "/usr/local/bin/bazelisk"
+			}
 		}
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

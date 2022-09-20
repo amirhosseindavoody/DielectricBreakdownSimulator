@@ -17,12 +17,19 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # Install Bazel
 ARG BAZELISK_VERSION=latest
 ARG BAZELISK_DOWNLOAD_SHA=dev-mode
-
 RUN ([ "${BAZELISK_VERSION}" = "latest" ] \
     && ( echo "BAZELISK_VERSION is latest" && curl -fSsL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/${BAZELISK_VERSION}/download/bazelisk-linux-amd64 ) \
     || (echo "BAZELISK_VERSION is: ${BAZELISK_VERSION}" && curl -fSsL -o /usr/local/bin/bazelisk https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-linux-amd64) ) \
     && ([ "${BAZELISK_DOWNLOAD_SHA}" = "dev-mode" ] || echo "${BAZELISK_DOWNLOAD_SHA} */usr/local/bin/bazelisk" | sha256sum --check - ) \
     && chmod 0755 /usr/local/bin/bazelisk
+
+ARG BUILDTOOLS_VERSION=latest
+ARG BUILDTOOLS_DOWNLOAD_SHA=dev-mode
+RUN ([ "${BUILDTOOLS_VERSION}" = "latest" ] \
+    && ( echo "BUILDTOOLS_VERSION is latest" && curl -fSsL -o /usr/local/bin/buildtools https://github.com/bazelbuild/buildtools/releases/${BUILDTOOLS_VERSION}/download/buildifier-linux-amd64 ) \
+    || (echo "BUILDTOOLS_VERSION is: ${BUILDTOOLS_VERSION}" && curl -fSsL -o /usr/local/bin/buildtools https://github.com/bazelbuild/buildtools/releases/download/${BUILDTOOLS_VERSION}/buildifier-linux-amd64) ) \
+    && ([ "${BUILDTOOLS_DOWNLOAD_SHA}" = "dev-mode" ] || echo "${BUILDTOOLS_DOWNLOAD_SHA} */usr/local/bin/buildtools" | sha256sum --check - ) \
+    && chmod 0755 /usr/local/bin/buildtools
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
