@@ -9,3 +9,8 @@ The `.devcontainer` directory creates a docker container that installs [`bazelis
     ```
     bazelisk build src/...
     ```
+
+* [Hedron's Compile Commands Extractor for Bazel](https://github.com/hedronvision/bazel-compile-commands-extractor)
+    ```
+    bazel run @hedron_compile_commands//:refresh_all
+    ```
