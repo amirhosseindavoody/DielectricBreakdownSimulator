@@ -11,8 +11,6 @@
 
 namespace dielectric_breakdown {
 
-constexpr int ndim = 2;
-
 class Node {
  public:
   Node(const std::vector<int_t> &pos);

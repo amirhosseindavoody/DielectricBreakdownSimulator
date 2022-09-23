@@ -13,6 +13,17 @@ cc_library(
 )
 
 cc_library(
+    name = "node_manager",
+    srcs = ["node_manager.cc"],
+    hdrs = ["node_manager.h"],
+    deps = [
+        ":constants",
+        ":node",
+        ":random_position_generator",
+    ],
+)
+
+cc_library(
     name = "random_position_generator",
     srcs = ["random_position_generator.cc"],
     hdrs = ["random_position_generator.h"],
