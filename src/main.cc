@@ -16,6 +16,12 @@
 
 DEFINE_int64(size_of_grid, 100, "Size of the grid");
 
+namespace {
+
+using namespace ::dielectric_breakdown;
+
+}  // namespace
+
 int main(int argc, char** argv) {
   // Initialize Google’s logging library.
   google::InitGoogleLogging(argv[0]);

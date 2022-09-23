@@ -1,6 +1,10 @@
 #include "src/node.h"
 
-Node::Node(const Position &pos)
+#include <vector>
+
+namespace dielectric_breakdown {
+
+Node::Node(const std::vector<int_t> &pos)
     : pos_(pos),
       pos_max_(pos),
       pos_min_(pos),
@@ -10,8 +14,8 @@ Node::Node(const Position &pos)
 
 Node *Node::self_ptr() { return this; };
 
-std::vector<Node::Position> Node::neighbors() {
-  std::vector<Position> neighbor;
+std::vector<std::vector<int_t>> Node::neighbors() {
+  std::vector<std::vector<int_t>> neighbor;
   for (std::size_t i = 0; i < pos_.size(); ++i) {
     if (pos_[i] > 0) {
       neighbor.push_back(pos_);
@@ -97,7 +101,7 @@ std::string Node::str() const {
   return res;
 }
 
-Node::Position Node::pos() const { return pos_; }
+const std::vector<int_t> &Node::pos() const { return pos_; }
 
 std::ostream &operator<<(std::ostream &os, const Node &node) {
   os << node.str();
@@ -106,11 +110,15 @@ std::ostream &operator<<(std::ostream &os, const Node &node) {
 
 int_t Node::cluster_size() { return FindRoot()->size_; };
 
-Node::Position Node::cluster_max_pos() { return FindRoot()->pos_max_; }
+const std::vector<int_t> &Node::cluster_max_pos() {
+  return FindRoot()->pos_max_;
+}
 
-Node::Position Node::cluster_min_pos() { return FindRoot()->pos_min_; }
+const std::vector<int_t> &Node::cluster_min_pos() {
+  return FindRoot()->pos_min_;
+}
 
-std::string pos_to_string(const Node::Position &pos) {
+std::string pos_to_string(const std::vector<int_t> &pos) {
   std::string res;
   for (const auto &p : pos) {
     res.append(std::to_string(p));
@@ -120,7 +128,7 @@ std::string pos_to_string(const Node::Position &pos) {
   return res;
 }
 
-std::ostream &operator<<(std::ostream &os, const Node::Position &pos) {
+std::ostream &operator<<(std::ostream &os, const std::vector<int_t> &pos) {
   std::string res;
   for (const auto &p : pos) {
     res.append(std::to_string(p));
@@ -130,3 +138,5 @@ std::ostream &operator<<(std::ostream &os, const Node::Position &pos) {
   os << res;
   return os;
 }
+
+}  // namespace dielectric_breakdown

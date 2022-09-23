@@ -16,9 +16,12 @@
 #include "src/node.h"
 #include "src/random_position_generator.h"
 
+namespace dielectric_breakdown {
+
 int_t simulate_breakdown() {
   LOG(INFO) << "Simulation started at " << absl::Now();
-  std::unordered_map<Node::Position, Node*, absl::Hash<Node::Position>> map;
+  std::unordered_map<std::vector<int_t>, Node*, absl::Hash<std::vector<int_t>>>
+      map;
 
   auto generator = RandomPositionGenerator(kSize, map);
 
@@ -52,7 +55,7 @@ int_t simulate_breakdown() {
   return step_counter;
 }
 
-BreakdownSimulator::BreakdownSimulator(std::array<int_t, kNdim> size)
+BreakdownSimulator::BreakdownSimulator(const std::vector<int_t>& size)
     : random_position_generator_(size, map_), size_(size) {}
 
 bool BreakdownSimulator::CreateDefect(int_t num_defects) {
@@ -116,3 +119,5 @@ std::ostream& operator<<(std::ostream& os,
                          result.final_number_of_defects);
   return os;
 }
+
+}  // namespace dielectric_breakdown

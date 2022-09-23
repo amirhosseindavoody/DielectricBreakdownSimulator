@@ -4,6 +4,8 @@
 #include "src/constants.h"
 #include "src/random_position_generator.h"
 
+namespace dielectric_breakdown {
+
 int_t simulate_breakdown();
 
 class BreakdownSimulator {
@@ -15,7 +17,7 @@ class BreakdownSimulator {
     int_t final_number_of_defects = 0;
   };
 
-  BreakdownSimulator(std::array<int_t, kNdim> size);
+  BreakdownSimulator(const std::vector<int_t>& size);
 
   ~BreakdownSimulator();
 
@@ -30,12 +32,15 @@ class BreakdownSimulator {
   // to max_coordinate along the zero'th dimensions.
   bool CreateDefect(int_t num_defects);
 
-  std::unordered_map<Node::Position, Node*, absl::Hash<Node::Position>> map_;
+  std::unordered_map<std::vector<int_t>, Node*, absl::Hash<std::vector<int_t>>>
+      map_;
   RandomPositionGenerator random_position_generator_;
-  std::array<int_t, kNdim> size_;
+  std::vector<int_t> size_;
 };
 
 std::ostream& operator<<(std::ostream& os,
                          const BreakdownSimulator::Result& result);
+
+}  // namespace dielectric_breakdown
 
 #endif  // SRC_SIMULATE_BREAKDOWN_H
