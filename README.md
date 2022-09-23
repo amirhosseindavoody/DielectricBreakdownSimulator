@@ -12,7 +12,7 @@ The `.devcontainer` directory creates a docker container that installs [`bazelis
 ## Better code completion and IDE 
 * [Hedron's Compile Commands Extractor for Bazel](https://github.com/hedronvision/bazel-compile-commands-extractor): This build rule adds a `compile_commands.json` file and an `external` directory to the Bazel workspace directory so that the IDE works better with the dependency recovery.
     ```
-    bazel run @hedron_compile_commands//:refresh_all
+    bazelisk run @hedron_compile_commands//:refresh_all
     ```
 
 ## Class definitions

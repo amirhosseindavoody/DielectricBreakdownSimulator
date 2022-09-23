@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
   for (int i = 0; i < 10; ++i) {
     LOG_EVERY_N(INFO, 1) << "Step: " << i;
 
-    BreakdownSimulator simulator(kSize);
+    BreakdownSimulator simulator(kDomain());
     BreakdownSimulator::Result sim_result = simulator.Run(4000, 10000);
     sim_results.push_back(sim_result);
 

@@ -17,7 +17,7 @@ class BreakdownSimulator {
     int_t final_number_of_defects = 0;
   };
 
-  BreakdownSimulator(const std::vector<int_t>& size);
+  explicit BreakdownSimulator(const Domain& domain);
 
   ~BreakdownSimulator();
 
@@ -35,7 +35,7 @@ class BreakdownSimulator {
   std::unordered_map<std::vector<int_t>, Node*, absl::Hash<std::vector<int_t>>>
       map_;
   RandomPositionGenerator random_position_generator_;
-  std::vector<int_t> size_;
+  Domain domain_;
 };
 
 std::ostream& operator<<(std::ostream& os,

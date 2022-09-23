@@ -9,7 +9,7 @@ namespace {
 
 constexpr int kSeed = 0;
 
-std::mt19937_64& random_gen() {
+inline std::mt19937_64& random_gen() {
   static std::mt19937_64 gen_ = [] {
     // Will be used to obtain a seed for the random number engine
     std::random_device rd;
@@ -29,8 +29,8 @@ RandomPositionGenerator::RandomPositionGenerator(
     const std::unordered_map<std::vector<int_t>, Node*,
                              absl::Hash<std::vector<int_t>>>& map)
     : max_pos_(max_pos), map_(map) {
-  for (int i = 0; i < kNdim; ++i) {
-    distrib_.push_back(std::uniform_int_distribution<int_t>(0, max_pos_[i]));
+  for (const auto max_position : max_pos_) {
+    distrib_.push_back(std::uniform_int_distribution<int_t>(0, max_position));
   }
 }
 

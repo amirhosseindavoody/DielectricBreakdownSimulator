@@ -21,7 +21,7 @@ std::vector<std::vector<int_t>> Node::neighbors() {
       neighbor.push_back(pos_);
       neighbor.back()[i] -= 1;
     }
-    if (pos_[i] < (kSize[i] - 1)) {
+    if (pos_[i] < (kDomain().size[i] - 1)) {
       neighbor.push_back(pos_);
       neighbor.back()[i] += 1;
     }

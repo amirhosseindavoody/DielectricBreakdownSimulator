@@ -8,9 +8,6 @@ namespace dielectric_breakdown {
 
 using int_t = int64_t;
 
-constexpr int kNdim = 3;
-const std::vector<int_t> kSize{100, 100};
-
 struct Domain {
   int_t number_of_dimensions = 0;
   std::vector<int_t> size;

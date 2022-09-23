@@ -18,45 +18,8 @@
 
 namespace dielectric_breakdown {
 
-int_t simulate_breakdown() {
-  LOG(INFO) << "Simulation started at " << absl::Now();
-  std::unordered_map<std::vector<int_t>, Node*, absl::Hash<std::vector<int_t>>>
-      map;
-
-  auto generator = RandomPositionGenerator(kSize, map);
-
-  bool breakdown = false;
-  int_t step_counter = 0;
-
-  while (!breakdown) {
-    step_counter++;
-    // LOG_EVERY_N(INFO, 100) << i;
-    auto pos_vec = generator.get(1);
-    for (auto& p : pos_vec) {
-      map.insert({p, new Node(p)});
-      auto neighbors = map.at(p)->neighbors();
-      for (auto& n : neighbors) {
-        if (map.count(n) == 1) {
-          map.at(p)->UnionByRank(map.at(n));
-        }
-      }
-
-      LOG_EVERY_N(INFO, 1000) << map.at(p)->cluster_min_pos()[0] << " , "
-                              << map.at(p)->cluster_max_pos()[0];
-      if (map.at(p)->cluster_min_pos()[0] == 0 &&
-          map.at(p)->cluster_max_pos()[0] == kSize[0]) {
-        LOG(INFO) << "Breakdown in " << step_counter << " steps.";
-        breakdown = true;
-        break;
-      }
-    }
-  }
-
-  return step_counter;
-}
-
-BreakdownSimulator::BreakdownSimulator(const std::vector<int_t>& size)
-    : random_position_generator_(size, map_), size_(size) {}
+BreakdownSimulator::BreakdownSimulator(const Domain& domain)
+    : random_position_generator_(domain.size, map_), domain_(domain) {}
 
 bool BreakdownSimulator::CreateDefect(int_t num_defects) {
   bool breakdown = false;
@@ -74,7 +37,7 @@ bool BreakdownSimulator::CreateDefect(int_t num_defects) {
     LOG_EVERY_N(INFO, 1000) << map_.at(pos)->cluster_min_pos()[0] << " , "
                             << map_.at(pos)->cluster_max_pos()[0];
     if (map_.at(pos)->cluster_min_pos()[0] <= 0 &&
-        map_.at(pos)->cluster_max_pos()[0] >= size_[0]) {
+        map_.at(pos)->cluster_max_pos()[0] >= domain_.size[0]) {
       breakdown = true;
     }
   }
