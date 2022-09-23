@@ -1,0 +1,2 @@
+# Set the compiler dialect to c++20
+build --cxxopt=-std=c++20
