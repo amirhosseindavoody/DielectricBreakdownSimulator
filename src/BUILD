@@ -43,6 +43,7 @@ cc_library(
         ":constants",
         ":node",
         ":random_position_generator",
+        ":node_manager",
         "@com_github_google_glog//:glog",
         "@com_google_absl//absl/hash",
         "@com_google_absl//absl/strings",

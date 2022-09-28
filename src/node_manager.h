@@ -18,9 +18,18 @@ class NodeManager {
   NodeManager(const Domain &domain,
               const RandomPositionGenerator random_position_generator);
 
+  // Creates n new defects and returns if the dielectric is broken down. The
+  // criteria for breakdown is that the is a continious path from coordinate 0
+  // to max_coordinate along the zero'th dimensions.
+  bool AddNodes(int_t num);
+
  private:
   // List of nodes generated
   std::vector<Node *> nodes_;
+
+  // All nodes indexed by their position
+  std::unordered_map<std::vector<int_t>, Node *, absl::Hash<std::vector<int_t>>>
+      nodes_by_position_;
 
   // The domain that the nodes are created inside
   Domain domain_;

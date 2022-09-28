@@ -2,6 +2,7 @@
 #define SRC_SIMULATE_BREAKDOWN_H
 
 #include "src/constants.h"
+#include "src/node_manager.h"
 #include "src/random_position_generator.h"
 
 namespace dielectric_breakdown {
@@ -36,6 +37,7 @@ class BreakdownSimulator {
       map_;
   RandomPositionGenerator random_position_generator_;
   Domain domain_;
+  NodeManager node_manager_;
 };
 
 std::ostream& operator<<(std::ostream& os,

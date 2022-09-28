@@ -19,7 +19,9 @@
 namespace dielectric_breakdown {
 
 BreakdownSimulator::BreakdownSimulator(const Domain& domain)
-    : random_position_generator_(domain.size, map_), domain_(domain) {}
+    : random_position_generator_(domain.size, map_),
+      domain_(domain),
+      node_manager_(domain, random_position_generator_) {}
 
 bool BreakdownSimulator::CreateDefect(int_t num_defects) {
   bool breakdown = false;
