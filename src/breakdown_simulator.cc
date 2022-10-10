@@ -1,7 +1,5 @@
 #include "src/breakdown_simulator.h"
 
-#include <glog/logging.h>
-
 #include <algorithm>
 #include <array>
 #include <iostream>
@@ -9,6 +7,7 @@
 #include <unordered_map>
 
 #include "absl/hash/hash.h"
+#include "absl/log/log.h"
 #include "absl/strings/substitute.h"
 #include "absl/time/clock.h"
 #include "constants.h"
@@ -19,13 +18,14 @@
 namespace dielectric_breakdown {
 
 BreakdownSimulator::BreakdownSimulator(const Domain& domain)
-    : random_position_generator_(domain.size, map_),
+    : random_position_generator_(domain.size),
       domain_(domain),
       node_manager_(domain, random_position_generator_) {}
 
 bool BreakdownSimulator::CreateDefect(int_t num_defects) {
   bool breakdown = false;
-  auto pos_vec = random_position_generator_.get(num_defects);
+  std::vector<std::vector<int_t>> pos_vec =
+      random_position_generator_.getN(num_defects);
 
   for (auto& pos : pos_vec) {
     map_.insert({pos, new Node(pos)});

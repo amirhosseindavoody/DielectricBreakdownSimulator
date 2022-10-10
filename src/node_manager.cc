@@ -1,5 +1,7 @@
 #include "src/node_manager.h"
 
+#include "absl/log/log.h"
+
 namespace dielectric_breakdown {
 
 NodeManager::NodeManager(
@@ -9,7 +11,8 @@ NodeManager::NodeManager(
 
 bool NodeManager::AddNodes(int_t num) {
   bool breakdown = false;
-  std::vector<std::vector<int_t>> pos_vec = random_position_generator_.get(num);
+  std::vector<std::vector<int_t>> pos_vec =
+      random_position_generator_.getN(num);
 
   for (auto& pos : pos_vec) {
     nodes_by_position_.insert({pos, new Node(pos)});
@@ -31,6 +34,10 @@ bool NodeManager::AddNodes(int_t num) {
   }
 
   return breakdown;
+}
+
+void NodeManager::AddNode() {
+  std::vector<int_t> pos_vec = random_position_generator_.get();
 }
 
 }  // namespace dielectric_breakdown

@@ -24,6 +24,9 @@ class NodeManager {
   bool AddNodes(int_t num);
 
  private:
+  // Creates a new node in the dielectric space.
+  void AddNode();
+
   // List of nodes generated
   std::vector<Node *> nodes_;
 

@@ -1,8 +1,6 @@
 #ifndef SRC_RANDOM_POSITION_GENERATOR_H
 #define SRC_RANDOM_POSITION_GENERATOR_H
 
-#include <glog/logging.h>
-
 #include <random>
 #include <vector>
 
@@ -14,19 +12,17 @@ namespace dielectric_breakdown {
 
 class RandomPositionGenerator {
  public:
-  RandomPositionGenerator(
-      std::vector<int_t> max_pos,
-      const std::unordered_map<std::vector<int_t>, Node*,
-                               absl::Hash<std::vector<int_t>>>& map);
+  RandomPositionGenerator(std::vector<int_t> max_pos);
 
-  std::vector<std::vector<int_t>> get(int_t n);
+  // Get a vector of N unique random positions.
+  std::vector<std::vector<int_t>> getN(int_t n);
+
+  // Get a one random position.
+  std::vector<int_t> get();
 
  private:
-  std::vector<std::uniform_int_distribution<int_t>> distrib_;
-  std::vector<int_t> max_pos_;
-
-  const std::unordered_map<std::vector<int_t>, Node*,
-                           absl::Hash<std::vector<int_t>>>& map_;
+  std::vector<std::uniform_int_distribution<int_t>> distributions_;
+  std::vector<int_t> max_positions_;
 };
 
 }  // namespace dielectric_breakdown

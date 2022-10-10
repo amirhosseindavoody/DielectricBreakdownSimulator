@@ -1,20 +1,18 @@
-#include <glog/logging.h>
-
 #include <algorithm>
 #include <array>
 #include <iostream>
 #include <random>
 #include <unordered_map>
 
+#include "absl/flags/flag.h"
+#include "absl/flags/parse.h"
 #include "absl/hash/hash.h"
+#include "absl/log/log.h"
 #include "absl/time/clock.h"
-#include "gflags/gflags.h"
 #include "src/breakdown_simulator.h"
 #include "src/constants.h"
 #include "src/node.h"
 #include "src/random_position_generator.h"
-
-DEFINE_int64(size_of_grid, 100, "Size of the grid");
 
 namespace {
 
@@ -23,11 +21,7 @@ using namespace ::dielectric_breakdown;
 }  // namespace
 
 int main(int argc, char** argv) {
-  // Initialize Google’s logging library.
-  google::InitGoogleLogging(argv[0]);
-  google::ParseCommandLineFlags(&argc, &argv, false);
-
-  // FLAGS_logtostderr = true;
+  absl::ParseCommandLine(argc, argv);
 
   LOG(INFO) << "Simulation started at " << absl::Now();
   std::vector<BreakdownSimulator::Result> sim_results;
@@ -35,9 +29,10 @@ int main(int argc, char** argv) {
     LOG_EVERY_N(INFO, 1) << "Step: " << i;
 
     BreakdownSimulator simulator(kDomain());
-    BreakdownSimulator::Result sim_result = simulator.Run(4000, 10000);
+    BreakdownSimulator::Result sim_result = simulator.Run(
+        /*initial_number_of_defects = */ 4000, /*max_steps = */ 10000);
     sim_results.push_back(sim_result);
 
-    std::cout << "Simulation " << i << ": " << sim_results.back() << std::endl;
+    std::cout << "Simulation " << i << ": " << sim_result << std::endl;
   }
 }
