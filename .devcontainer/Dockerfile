@@ -34,3 +34,8 @@ RUN ([ "${BUILDTOOLS_VERSION}" = "latest" ] \
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
+
+# Install oy-my-zsh
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions /home/vscode/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+COPY .zshrc /home/vscode/.zshrc
+RUN chown -R vscode:vscode /home/vscode/.zshrc
