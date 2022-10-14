@@ -9,6 +9,12 @@ The `.devcontainer` directory creates a docker container that installs [`bazelis
     ```
     bazelisk build src/...
     ```
+
+* Run tests
+    ```
+    bazelisk test src:all --test_output=all --cache_test_results=no
+    ```
+
 ## Better code completion and IDE 
 * [Hedron's Compile Commands Extractor for Bazel](https://github.com/hedronvision/bazel-compile-commands-extractor): This build rule adds a `compile_commands.json` file and an `external` directory to the Bazel workspace directory so that the IDE works better with the dependency recovery.
     ```
