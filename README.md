@@ -12,7 +12,15 @@ The `.devcontainer` directory creates a docker container that installs [`bazelis
 
 * Run tests
     ```
-    bazelisk test src:all --test_output=all --cache_test_results=no
+    bazelisk test src:all \
+        --test_output=all \
+        --cache_test_results=no \
+        --nouse_action_cache
+    ```
+
+* Clean Bazel cache
+    ```
+    bazelisk clean
     ```
 
 ## Better code completion and IDE 

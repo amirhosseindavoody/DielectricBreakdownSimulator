@@ -9,12 +9,10 @@
 
 namespace dielectric_breakdown {
 
-// Demonstrate some basic assertions.
-TEST(HelloTest, BasicAssertions) {
+// Trivial test
+TEST(RandomPositionGeneratorTest, TrivialTest) {
   std::vector<int_t> max_position{1};
   RandomPositionGenerator random_position_generator(max_position);
-  LOG(INFO) << "Amirhossein: hi";
-  std::cout << "Hello world!" << std::endl;
 }
 
 }  // namespace dielectric_breakdown

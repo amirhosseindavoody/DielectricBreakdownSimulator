@@ -40,9 +40,10 @@ cc_library(
 cc_test(
     name = "random_position_generator_test",
     size = "small",
-    srcs = ["random_position_generator.cc"],
+    srcs = ["random_position_generator_test.cc"],
     deps = [
         ":random_position_generator",
+        "@com_google_absl//absl/log",
         "@com_google_googletest//:gtest_main",
     ],
 )
