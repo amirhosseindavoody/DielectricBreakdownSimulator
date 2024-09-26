@@ -136,7 +136,8 @@
         "explorer.autoRevealExclude": {
             "**/.pixi": true,
             "**/build": true,
-            "**/.conan": true
+            "**/.conan": true,
+            "${workspaceFolder}/build": true
         },
         "[cpp]": {
             "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"

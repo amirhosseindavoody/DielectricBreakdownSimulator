@@ -1,10 +1,7 @@
 #ifndef SRC_NODE_H
 #define SRC_NODE_H
 
-#include <algorithm>
 #include <iostream>
-#include <random>
-#include <unordered_map>
 #include <vector>
 
 #include "constants.h"
@@ -34,6 +31,8 @@ class Node {
   const std::vector<int_t> &cluster_min_pos();
 
   Node *self_ptr();
+
+  std::string ToString();
 
   friend std::ostream &operator<<(std::ostream &os, const Node &dt);
 

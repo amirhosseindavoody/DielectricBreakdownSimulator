@@ -13,7 +13,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_C_COMPILER ../.pixi/envs/default/bin/gcc)
 set(CMAKE_CXX_COMPILER ../.pixi/envs/default/bin/g++)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Set the Release build flags to include the highest optimization level

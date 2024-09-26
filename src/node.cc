@@ -1,6 +1,8 @@
 #include "node.h"
 
 #include <vector>
+#include <fmt/ranges.h>
+#include <fmt/format.h>
 
 namespace dielectric_breakdown {
 
@@ -117,6 +119,10 @@ const std::vector<int_t> &Node::cluster_max_pos() {
 const std::vector<int_t> &Node::cluster_min_pos() {
   return FindRoot()->pos_min_;
 }
+
+std::string Node::ToString(){
+  return fmt::format("{}",pos_);
+};
 
 std::string pos_to_string(const std::vector<int_t> &pos) {
   std::string res;
