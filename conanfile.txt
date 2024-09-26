@@ -1,0 +1,9 @@
+[requires]
+fmt/10.2.1
+gtest/1.15.0
+spdlog/1.14.1
+abseil/20240722.0
+
+[generators]
+CMakeDeps
+CMakeToolchain

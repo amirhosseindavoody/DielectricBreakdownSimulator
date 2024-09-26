@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "src/constants.h"
+#include "constants.h"
 
 namespace dielectric_breakdown {
 

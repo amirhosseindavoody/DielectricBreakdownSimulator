@@ -1,4 +1,4 @@
-#include "src/node.h"
+#include "node.h"
 
 #include <vector>
 
